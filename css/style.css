@@ -456,6 +456,16 @@ h5 {
   .carousel-caption .lead {
     font-size: 1.2rem;
   }
+
+  .footerimg {
+  background-image: url("../images/footerimg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100px;
+  width: 100%;
+}
+
 }
 
 /* ?��?裝置 (小於 768px) */
@@ -865,7 +875,7 @@ h5 {
 
 
 
-/* 確�?比�?�?�� */
+
 .ratio-16x9 {
   position: relative;
   width: 100%;
@@ -882,7 +892,6 @@ h5 {
   border: none;
 }
 
-/* 診�??��?表樣�?*/
 .schedule-container {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
@@ -906,7 +915,7 @@ h5 {
   }
 }
 
-/* ?�絡?�們�?塊樣�?*/
+
 .contact-card {
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -1005,7 +1014,7 @@ h5 {
   }
 }
 
-/* 添�??��??��?載�???*/
+
 .lazy-load {
   opacity: 0;
   transition: opacity 0.5s;
@@ -1015,7 +1024,7 @@ h5 {
   opacity: 1;
 }
 
-/* 添�??��??�渡?��? */
+
 .btn {
   transition: all var(--transition-speed);
 }
@@ -1025,7 +1034,7 @@ h5 {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* ?�進�??�卡?��?�?*/
+
 .service-card i {
   transition: transform var(--transition-speed);
   color: var(--dark-color);
@@ -1081,7 +1090,6 @@ h5 {
   font-weight: bolder;
 }
 
-/* 平板?��?機響?��??��? */
 @media (max-width: 992px) {
   :root {
     --transition-speed: 0.2s;
@@ -1092,7 +1100,7 @@ h5 {
   }
 }
 
-/* ?�印媒�??�詢 - 保�??�印?��??��???*/
+
 @media print {
   .video-container, .carousel, .navbar-toggler, .btn, .play-icon {
     display: none !important;
@@ -1128,7 +1136,7 @@ h5 {
   }
 }
 
-/* 添�?淡入?��? */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1138,7 +1146,7 @@ h5 {
   animation: fadeIn 0.8s ease forwards;
 }
 
-/* ?�到?�部?��? */
+
 .to-top-container {
   position: fixed;
   bottom: 30px;
@@ -1193,7 +1201,7 @@ h5 {
   }
 }
 
-/* ?��?義�??�樣�?*/
+
 .btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
@@ -1219,7 +1227,7 @@ h5 {
   color: white;
 }
 
-/* ?�繫表單�?? */
+
 .contact-form label {
   font-weight: 500;
   color: #555;
@@ -1280,7 +1288,7 @@ h5 {
   }
 }
 
-/* 表單驗�?�?? */
+
 .form-control.is-invalid {
   border-color: #dc3545;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
