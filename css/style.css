@@ -462,7 +462,7 @@ h5 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100px;
+  min-height:80px;
   width: 100%;
 }
 
