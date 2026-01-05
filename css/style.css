@@ -30,7 +30,7 @@
       vertical-align: middle;
     }
 
-    /* 左側分類欄 */
+    /* 左側?��?�?*/
     .env-sidebar {
       background-color: #ffffff;
       box-shadow: 0 0 15px rgba(0,0,0,0.06);
@@ -104,7 +104,7 @@
       padding: 10px;
     }
 
-    /* 右側卡片 */
+    /* ?�側?��? */
     .env-card {
       background-color: #ffffff;
       border-radius: 4px;
@@ -117,8 +117,8 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
     .env-card-img {
-      background-color: #c5c7d6; /* 預設底色，放照片後可移除 */
-      aspect-ratio: 4 / 3;      /* 固定比例 */
+      background-color: #c5c7d6; /* ?�設底色，放?��?後可移除 */
+      aspect-ratio: 4 / 3;      /* ?��?比�? */
       overflow: hidden;
     }
     .env-card-img img {
@@ -146,7 +146,7 @@
     }
 
 
-/* 全域變數 - 方便未來修改和保持一致性 */
+/* ?��?變數 - ?�便?��?修改?��??��??��?*/
 @supports (-webkit-touch-callout: none) {
   .carousel-item {
     height: auto !important;
@@ -156,19 +156,19 @@
   .carousel-item img {
     height: 100% !important;
     object-fit: cover;
-    object-position: center top !important; /* 顯示圖片頂部 */
+    object-position: center top !important; /* 顯示?��??�部 */
     width: 100%;
     transform: none !important;
     max-width: 100%;
   }
 
-  /* 修正 iOS Safari 上的輪播固定高度問題 */
+  /* 修正 iOS Safari 上�?輪播?��?高度?��? */
   picture {
     display: block;
     height: 100%;
   }
   
-  /* 確保輪播容器不會被截斷 */
+  /* 確�?輪播容器不�?被截??*/
   .carousel {
     max-height: 500px;
     overflow: visible;
@@ -253,7 +253,7 @@ h2 {
 }
 
 
-/* 不同區塊背景交替 */
+/* 不�??�塊�??�交??*/
 #video-intro {
   background-color: #f8f9fa;
 }
@@ -397,16 +397,25 @@ h5 {
 
 
 
+.footerimg {
+  background-image: url("../images/footerimg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 300px;
+  width: 100%;
+}
+
  
 
-/* 為所有輪播圖添加圖片預加載，提高性能 */
+/* ?��??�輪?��?添�??��??��?載�??��??�能 */
 @media (prefers-reduced-motion: no-preference) {
   .carousel-item img {
     image-rendering: auto;
   }
 }
 
-/* 為所有圖片添加平滑過渡 */
+/* ?��??��??�添?�平滑�?�?*/
 .carousel-inner {
   will-change: transform;
   backface-visibility: hidden;
@@ -434,7 +443,7 @@ h5 {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* 平板裝置 (768px 到 1024px) */
+/* 平板裝置 (768px ??1024px) */
 @media (max-width: 1024px) {
   .carousel-item {
     height: auto !important;
@@ -449,7 +458,7 @@ h5 {
   }
 }
 
-/* 手機裝置 (小於 768px) */
+/* ?��?裝置 (小於 768px) */
 @media (max-width: 768px) {
   .carousel,
   .carousel-inner,
@@ -484,7 +493,7 @@ h5 {
   }
 }
 
-/* 小型手機 (小於 576px) */
+/* 小�??��? (小於 576px) */
 @media (max-width: 576px) {
   .carousel-item {
     height:auto;
@@ -507,7 +516,7 @@ h5 {
 }
 
 
-/* 超小型手機 (更窄屏幕) */
+/* 超�??��?�?(?��?屏�?) */
 @media (max-width: 360px) {
   .carousel-item {
     height: auto;
@@ -527,7 +536,7 @@ h5 {
   }
 }
 
-/* iPhone 及其他現代手機 (393px 到 430px) */
+/* iPhone ?�其他現�??�?(393px ??430px) */
 @media (max-width: 430px) {
   .carousel,
   .carousel-inner,
@@ -563,14 +572,14 @@ h5 {
     margin-bottom: 0;
   }
 
-  /* 讓輪播導航按鈕更小 */
+  /* 讓輪?��??��??�更�?*/
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
     width: 20px;
     height: 20px;
   }
 
-  /* 優化導航欄在 iPhone 上的顯示 */
+  /* ?��?導航欄在 iPhone 上�?顯示 */
   .navbar-brand {
     font-size: 1rem;
   }
@@ -580,7 +589,7 @@ h5 {
     height: 40px;
   }
 
-  /* 優化服務卡片在 iPhone 上的顯示 */
+  /* ?��??��??��???iPhone 上�?顯示 */
   .service-card {
     margin-bottom: 1rem;
   }
@@ -593,7 +602,7 @@ h5 {
     font-size: 2rem;
   }
 
-  /* 優化聯絡資訊在 iPhone 上的顯示 */
+  /* ?��??�絡資�???iPhone 上�?顯示 */
   .contact-card .card-body {
     padding: 1rem;
   }
@@ -603,7 +612,7 @@ h5 {
   }
 }
 
-/* 影片區塊樣式 */
+/* 影�??�塊樣�?*/
 
 
 
@@ -687,7 +696,7 @@ h5 {
   filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-/* 在手機版縮小視頻高度 */
+/* ?��?機�?縮�?視頻高度 */
 @media (max-width: 576px) {
   #video-intro {
     padding-top: 2rem;
@@ -798,7 +807,7 @@ h5 {
   margin: 25px 0;
 }
 
-/* 響應式調整 */
+/* ?��?式調??*/
 @media (max-width: 768px) {
   .footer {
     padding: 30px 0 20px;
@@ -837,7 +846,7 @@ h5 {
   margin: 0 auto;
 }
 
-/* 表格響應式設計 */
+/* 表格?��?式設�?*/
 .table-responsive {
   margin-top: 1rem;
 }
@@ -856,12 +865,12 @@ h5 {
 
 
 
-/* 確保比例正確 */
+/* 確�?比�?�?�� */
 .ratio-16x9 {
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%; /* 16:9 比例 */
+  padding-bottom: 56.25%; /* 16:9 比�? */
 }
 
 .ratio-16x9 iframe {
@@ -873,7 +882,7 @@ h5 {
   border: none;
 }
 
-/* 診療時間表樣式 */
+/* 診�??��?表樣�?*/
 .schedule-container {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
@@ -897,7 +906,7 @@ h5 {
   }
 }
 
-/* 聯絡我們區塊樣式 */
+/* ?�絡?�們�?塊樣�?*/
 .contact-card {
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -996,7 +1005,7 @@ h5 {
   }
 }
 
-/* 添加圖片懶加載效果 */
+/* 添�??��??��?載�???*/
 .lazy-load {
   opacity: 0;
   transition: opacity 0.5s;
@@ -1006,7 +1015,7 @@ h5 {
   opacity: 1;
 }
 
-/* 添加按鈕過渡效果 */
+/* 添�??��??�渡?��? */
 .btn {
   transition: all var(--transition-speed);
 }
@@ -1016,7 +1025,7 @@ h5 {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* 改進服務卡片圖標 */
+/* ?�進�??�卡?��?�?*/
 .service-card i {
   transition: transform var(--transition-speed);
   color: var(--dark-color);
@@ -1072,7 +1081,7 @@ h5 {
   font-weight: bolder;
 }
 
-/* 平板與手機響應式優化 */
+/* 平板?��?機響?��??��? */
 @media (max-width: 992px) {
   :root {
     --transition-speed: 0.2s;
@@ -1083,7 +1092,7 @@ h5 {
   }
 }
 
-/* 打印媒體查詢 - 保證列印時的可讀性 */
+/* ?�印媒�??�詢 - 保�??�印?��??��???*/
 @media print {
   .video-container, .carousel, .navbar-toggler, .btn, .play-icon {
     display: none !important;
@@ -1119,7 +1128,7 @@ h5 {
   }
 }
 
-/* 添加淡入效果 */
+/* 添�?淡入?��? */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1129,7 +1138,7 @@ h5 {
   animation: fadeIn 0.8s ease forwards;
 }
 
-/* 回到頂部按鈕 */
+/* ?�到?�部?��? */
 .to-top-container {
   position: fixed;
   bottom: 30px;
@@ -1184,7 +1193,7 @@ h5 {
   }
 }
 
-/* 自定義按鈕樣式 */
+/* ?��?義�??�樣�?*/
 .btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
@@ -1210,7 +1219,7 @@ h5 {
   color: white;
 }
 
-/* 聯繫表單樣式 */
+/* ?�繫表單�?? */
 .contact-form label {
   font-weight: 500;
   color: #555;
@@ -1271,7 +1280,7 @@ h5 {
   }
 }
 
-/* 表單驗證樣式 */
+/* 表單驗�?�?? */
 .form-control.is-invalid {
   border-color: #dc3545;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -1288,7 +1297,7 @@ h5 {
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
-/* Banner RWD 統一設定 */
+/* Banner RWD 統�?設�? */
 .carousel,
 .carousel-inner,
 .carousel-item,
