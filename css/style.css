@@ -1,13 +1,19 @@
 
+   /* ==============================================
+   基本設定 - 整體字型與背景
+============================================== */
+   
    body {
       font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "PingFang TC", sans-serif;
-      background-color: #fef4e5;
+      background-color: #fef4e5;  /* 非常淺的暖色背景 */
     }
 
+    /* 各區段通用內距 */
     .section-env {
-      padding: 60px 0 80px;
+      padding: 60px 0 80px;  /* 上下留白較多，適合內容區段 */
     }
 
+    /* 區段標題樣式 */
     .section-title {
       text-align: center;
       margin-bottom: 40px;
@@ -30,7 +36,7 @@
       vertical-align: middle;
     }
 
-    /* 左側?��?�?*/
+    /* 左側導航欄（環境/側邊欄） */
     .env-sidebar {
       background-color: #ffffff;
       box-shadow: 0 0 15px rgba(0,0,0,0.06);
@@ -38,7 +44,7 @@
       overflow: hidden;
     }
     .env-sidebar-header {
-      background-color: var(--primary-color);
+      background-color: var(--primary-color); /* 使用自訂主色 */
       color: #fff;
       padding: 30px 20px;
       text-align: center;
@@ -74,6 +80,8 @@
       color: #fff;
     }
 
+    
+    /* 側邊欄聯絡資訊區塊 */
     .env-contact {
       padding: 20px 24px 24px;
       text-align: center;
@@ -104,7 +112,7 @@
       padding: 10px;
     }
 
-    /* ?�側?��? */
+    /* 卡片樣式（環境/環境介紹卡片） */
     .env-card {
       background-color: #ffffff;
       border-radius: 4px;
@@ -135,18 +143,22 @@
       color: #555;
     }
 
-    /* RWD 調整 */
+
+/* ==============================================
+   響應式調整（RWD）
+============================================== */
+
     @media (max-width: 991.98px) {
       .section-env {
         padding-top: 40px;
       }
       .env-sidebar {
-        margin-bottom: 20px;
+        margin-bottom: 20px;  /* 手機版側邊欄放到內容上方 */
       }
     }
 
 
-/* ?��?變數 - ?�便?��?修改?��??��??��?*/
+/* iOS 裝置特別處理（主要是輪播圖相關） */
 @supports (-webkit-touch-callout: none) {
   .carousel-item {
     height: auto !important;
@@ -156,25 +168,26 @@
   .carousel-item img {
     height: 100% !important;
     object-fit: cover;
-    object-position: center top !important; /* 顯示?��??�部 */
+    object-position: center top !important; /* 調整圖片位置 */
     width: 100%;
     transform: none !important;
     max-width: 100%;
   }
-
-  /* 修正 iOS Safari 上�?輪播?��?高度?��? */
-  picture {
+  
+   picture {
     display: block;
     height: 100%;
   }
-  
-  /* 確�?輪播容器不�?被截??*/
+
   .carousel {
     max-height: 500px;
     overflow: visible;
   }
 }
 
+/* ==============================================
+   導航列（Navbar）樣式
+============================================== */
 
 .navbar-brand h1 {
   font-size: 1.5rem;
@@ -220,14 +233,16 @@
 
 
 
-
+/* 平滑滾動 */
 html {
   scroll-behavior: smooth;
 }
 
-
+/* ==============================================
+   變數定義（主題色、主色調）
+============================================== */
 :root {
-  --primary-color: #B5AB92;
+  --primary-color: #B5AB92;   /* 主要色調：灰褐色 */
   --secondary-color: #555;
   --dark-color: #343a40;
   --light-color: #f8f9fa;
@@ -237,72 +252,79 @@ html {
   --border-radius: 10px;
 }
 
+/* 共通標題 */
 h2 {
   font-size: 28px;
   font-weight: bold;
   color: #555;
 }
 
+/* 導航列陰影與定位 */
 .navbar {
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.1));
-  position: sticky;
+  position: sticky; /* 滾動時固定在頂部（需配合 top:0 使用） */
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 15px;  /* Logo 與文字間距 */
 }
 
 .navbar-brand img {
   width: 50px;
   height: 50px;
-  object-fit: contain;
+  object-fit: contain; /* 確保 Logo 不變形 */
 }
 
 .mb-0 {
   line-height: 1.8;
 }
 
+/* ==============================================
+   區段背景色
+============================================== */
 
-/* 不�??�塊�??�交??*/
 #video-intro {
-  background-color: #f8f9fa;
+  background-color: #f8f9fa;  /* 淺灰背景，用於影片介紹區 */
 }
 
 #about {
-  background-color: #ffffff;
+  background-color: #ffffff;  /* 純白背景，用於關於我們區 */
 }
 
+
+/* ==============================================
+   輪播圖（Carousel）主要樣式
+============================================== */
 .carousel {
   margin-bottom: 50px;
 }
 
 .carousel-item {
   position: relative;
-  height: 900px;
-  overflow: hidden;
+  height: 900px;     /* 大螢幕固定高度 */
+  overflow: hidden;  /* 超出部分隱藏 */
   
 }
 
 .carousel-item img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
-  object-position: center;
-  -webkit-transform: translateZ(0);
+  object-fit: cover;  /* 圖片填滿容器，裁切多餘部分 */
+  object-position: center;  /* 圖片置中顯示 */
+  -webkit-transform: translateZ(0);  /* 硬體加速，改善滾動性能 */
   transform: translateZ(0);
-  will-change: transform;
+  will-change: transform;  /* 提示瀏覽器即將變換，提升效能 */
   
 }
 
 
 
 
-.doctor {
-  padding-top:5%;
-  padding-bottom: 5%;
-}
+
 
 .container h2 {
   display: block;
@@ -323,17 +345,9 @@ h2 {
 .col-md-6 {
   padding: 2%;
 }
-.allageweek {
-  margin-top: 10px;
-}
 
-.allageweek p {
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
 
-}
+
 
 
 .text-center{
