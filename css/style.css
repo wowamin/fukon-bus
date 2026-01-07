@@ -1121,6 +1121,43 @@ h5 {
 
 
 
+.banner-desktop {
+  display: block;
+}
+
+.banner-split {
+  display: none;
+}
+
+.banner-split-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .carousel,
+  .carousel-inner,
+  .carousel-item,
+  .banner-picture {
+    height: auto;
+    max-height: none;
+    min-height: 0;
+  }
+
+  .banner-desktop {
+    display: none;
+  }
+
+  .banner-split {
+    display: block;
+  }
+}
+
+
+
+
 @media (max-width: 992px) {
   :root {
     --transition-speed: 0.2s;
@@ -1353,6 +1390,21 @@ h5 {
   object-position: center top;
 }
 
+.banner-desktop {
+  display: block;
+}
+
+.banner-split {
+  display: none;
+}
+
+.banner-split-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
 @media (max-width: 1620px) {
   .carousel,
   .carousel-inner,
@@ -1369,10 +1421,18 @@ h5 {
   .carousel-inner,
   .carousel-item,
   .banner-picture {
-    height: 400px;
-    max-height: 400px;
-    min-height: 400px;
+    height: auto;
+    max-height: none;
+    min-height: 0;
         }
+
+  .banner-desktop {
+    display: none;
+  }
+
+  .banner-split {
+    display: block;
+  }
 }
 
 @media (max-width: 768px) {
