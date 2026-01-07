@@ -1153,6 +1153,18 @@ h5 {
   .banner-split {
     display: block;
   }
+  .busbar-container h2 {
+    font-size: 26px;
+    font-weight: bolder;
+    margin-top: 20px;
+
+  }
+
+  .busbar-container p {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
 }
 
 
