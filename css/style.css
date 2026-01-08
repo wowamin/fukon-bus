@@ -1165,6 +1165,10 @@ h5 {
     font-weight: bold;
   }
 
+   #services .services-grid > [class*="col-"] {
+    flex: 0 0 50%;
+    max-width: 50%;
+
 }
 
 
