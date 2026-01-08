@@ -6,8 +6,10 @@
    body {
       font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "PingFang TC", sans-serif;
       background-color: #fef4e5;  /* 非常淺的暖色背景 */
-    }
+      font-size:16px; line-height:1.6; }
 
+
+   
     /* 各區段通用內距 */
     .section-env {
       padding: 60px 0 80px;  /* 上下留白較多，適合內容區段 */
