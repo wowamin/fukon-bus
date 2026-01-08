@@ -1,11 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-TW">
-  <head>
- 
-
-
-
-    <!-- Required meta tags -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!-- Required meta tags -->
     <meta charset="utf-8">
     <link rel="shortcut icon" href="./images/favico.ico" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
@@ -41,7 +40,7 @@
 
     <!-- 網站標題 -->
 
-  <title>FUKON富康巴士 | 無障礙服務/台南無障礙計程車/台南復康巴士</title>
+  <title> 聯絡我們 | FUKON富康巴士 | 無障礙服務/台南無障礙計程車/台南復康巴士</title>
 
 
    <!-- 描述（SEO + 社群共用） -->
@@ -93,11 +92,9 @@
   </head>
 
 
-
-  <body>
-
+<body>
     
-     <!-- 導航欄 -->
+<!-- 導航欄 -->
     
 
      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
@@ -120,131 +117,62 @@
               <a class="nav-link" href="#busbar">收費標準</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">聯絡我們</a>
+              <a class="nav-link" href="#">聯絡我們</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <!-- 首頁橫幅 -->
-    <section id="home">
-      <div class="carousel slide carousel-fade" data-bs-ride="carousel" id="carouselExampleFade">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <picture class="banner-picture">
-              <source media="(max-width: 1024px)" srcset="./images/banner_1024.webp">
-              <img src="./images/banner_1920.webp" class="d-block  banner-img" alt="fukon-bus BANNER" loading="eager" decoding="async">
-            </picture>
-            </div>
-          
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">上一張</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">下一張</span>
-        </button>
-      </div>
-    </section>
-
-  <section id="busmenu">
-    <div class="banner-desktop mb-5">
-       <img src="images/bus banner_a.webp" class="d-block banner-img" alt="富康巴士 Banner" loading="eager" decoding="async">
-     </div>
-
-     <div class="banner-split mt-3">
-      <img src="./images/bus banner_1024a.webp" class="d-block banner-split-img mb-5" alt="fukon-bus BANNER split 1" loading="eager" decoding="async">
-      <img src="./images/bus banner_1024b.webp" class="d-block banner-split-img mb-3 " alt="fukon-bus BANNER split 2" loading="eager" decoding="async">
-    </div>
-  </section> 
-
-     <!-- 服務項目 -->
-    <section id="services" class="py-5 ">
-      <div class="container item ">
-        <h2 class="text-center mb-5 fade-in">服務項目</h2>
-                       
-        <div class="row services-grid">
-          <div class="col-md-3 mb-4">
-            <div class="card service-card h-100 fade-in" style="animation-delay: 0.1s;">
-              <div class="card-body text-center">
-                <i class="fa-solid  fa-bus display-4 mb-3"></i>
-                <h5 class="card-title">包車旅遊</h5>
-                <p class="card-text">專業司機，安全舒適的旅程</p>
+      
+        <!-- 聯繫表單 -->
+        <div class="row mt-4">
+          <div class="col-6 justify-content-center mx-auto mb-5 mt-4">
+            <div class="contact-card">
+              <div class="card-header">
+                <h4><i class="bi bi-envelope-fill me-2"></i>聯繫我們</h4>
               </div>
-            </div>
-          </div>
-          <div class="col-md-3 mb-4">
-            <div class="card service-card h-100 fade-in" style="animation-delay: 0.2s;">
-              <div class="card-body text-center">
-                <i class="fa-solid fa-hospital display-4 mb-3"></i>
-                <h5 class="card-title">醫院回診</h5>
-                <p class="card-text">準時接送，貼心服務</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 mb-4">
-            <div class="card service-card h-100 fade-in" style="animation-delay: 0.3s;">
-              <div class="card-body text-center">
-                <i class="fas fa-hands-holding-child display-4 mb-3"></i>
-                <h5 class="card-title">復健治療</h5>
-                <p class="card-text">專業復健，助您重拾健康</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 mb-4">
-            <div class="card service-card h-100 fade-in" style="animation-delay: 0.4s;">
-              <div class="card-body text-center">
-                <i class="fas fa-house-chimney-medical display-4 mb-3"></i>
-                <h5 class="card-title">出院休養</h5>
-                <p class="card-text">舒適接送，安心休養</p>
+              <div class="card-body">
+                <p class="lead mb-4">如有任何問題或預約需求，歡迎填寫下方表單，將使用您的郵件客戶端發送訊息給我們，我們將盡快回覆您。</p>
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/xldlrlln" method="POST">
+                  <div class="row">
+                    <div class="col-md-4 mb-3 ">
+                      <label for="name" class="form-label">姓名 <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                  
+                    <div class="col-md-8 mb-3 ">
+                      <label for="phone" class="form-label">電話 <span class="text-danger">*</span></label>
+                      <input type="tel" class="form-control" id="phone" name="phone" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">電子郵件 <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="subject" class="form-label">主旨</label>
+                    <input type="text" class="form-control" id="subject" name="subject">
+                  </div>
+                  <div class="mb-3">
+                    <label for="message" class="form-label">訊息內容 <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                  </div>
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="privacy" required>
+                    <label class="form-check-label" for="privacy">我同意隱私權政策並同意診所處理我的個人資料 <span class="text-danger">*</span></label>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-5">送出訊息</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    
 
-    <!-- 宣傳影片 -->
-    <section id="promo-video" class="py-5">
-      <div class="container text-center">
-        <h2 class="mb-4">交通接送宣傳影片</h2>
-        <div class="video-container mb-4">
-          <iframe src="https://www.youtube.com/embed/VTqHIeShehI?si=zH8tI-KNtA-cWVMY&amp;start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>         
-        </div>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/8p_knBrLHVg?si=zH8tI-KNtA-cWVMY&amp;start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>         
-        </div>
-      </div>
-    </section>  
-
- <section id="busbar">
-  <div class="container" >
-    <div class="busbar-container text-center">
-      <!-- <div class="banner-picture"> -->
-     
-     <div class="banner-desktop mb-5">
-       <img src="images/bus banner_b.webp" class="d-block banner-img" alt="富康巴士 Banner" loading="eager" decoding="async">
-     </div>
-    <div class="bus-price banner-split mt-3"> 
-      <img src="./images/bus banner_1024c.webp" class="d-block banner-split-img mb-5" alt="fukon-bus BANNER split 3" loading="eager" decoding="async">
-    </div>
-  
-      <div class="busbar-container text-center">
-       <h2 class="mb-2">選擇富康巴士，享受專業舒適的旅程</h2>
-       <p class="lead">無論是包車旅遊、醫院回診、復健治療或出院休養，我們都能提供最貼心的服務，讓您安心出行。</p>
-       <button class="btn btn-success btn-lg mb-5" onclick="window.location.href='https://line.me/ti/p/pyzvr4VGHa'">立即預約</button>
-      </div>
-  </div>
-</div> 
-   <div class="footerimg">
-   </div>
-</section>
-
-
+      
     <!-- 頁尾 -->
     <footer class="footer py-4">
       <div class="container flex-column">
@@ -298,22 +226,5 @@
     </div>
 
 
-
-  
-
-
-
- <!-- JS -->
-  <script src="./js/Schedule.js"></script>
-  <script src="./js/traffic.js"></script>
-  <script src="./js/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-  
-
-  <!-- Facebook SDK -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v23.0"></script>
-    
-  
-  </body>
+</body>
 </html>
