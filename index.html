@@ -131,29 +131,60 @@
     </nav>
 
 
-    <!-- 首頁橫幅 -->
-    <section id="home">
-      <div class="carousel slide carousel-fade" data-bs-ride="carousel" id="carouselExampleFade">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <picture class="banner-picture">
-              <source media="(max-width: 1024px)" srcset="./images/banner_1024.webp">
-              <img src="./images/banner_1920.webp" class="d-block  banner-img" alt="fukon-bus BANNER" loading="eager" decoding="async">
-            </picture>
-            </div>
-          
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">上一張</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">下一張</span>
-        </button>
+   <!-- 首頁橫幅 -->
+<section id="home">
+  <div id="carouselExampleFade"
+       class="carousel slide carousel-fade"
+       data-bs-ride="carousel"
+       data-bs-interval="3000">
+
+    <div class="carousel-inner">
+
+      <!-- 第一張 -->
+      <div class="carousel-item active">
+        <picture class="banner-picture">
+          <source media="(max-width: 1024px)" srcset="./images/banner_1024.webp">
+          <img src="./images/banner_1920.webp"
+               class="d-block w-100 banner-img"
+               alt="Fukon Bus 首頁橫幅"
+               loading="eager"
+               decoding="async">
+        </picture>
       </div>
-    </section>
+
+      <!-- 第二張 -->
+      <div class="carousel-item">
+        <picture class="banner-picture">
+          <source media="(max-width: 1024px)" srcset="./images/banner_1024_a.webp">
+          <img src="./images/banner_1920_a.webp"
+               class="d-block w-100 banner-img"
+               alt="Fukon Bus 無障礙接送服務"
+               loading="lazy"
+               decoding="async">
+        </picture>
+      </div>
+
+    </div>
+
+    <!-- 上一張 -->
+    <button class="carousel-control-prev" type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">上一張</span>
+    </button>
+
+    <!-- 下一張 -->
+    <button class="carousel-control-next" type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">下一張</span>
+    </button>
+
+  </div>
+</section>
+
 
   <section id="busmenu">
     <div class="banner-desktop mb-5">
