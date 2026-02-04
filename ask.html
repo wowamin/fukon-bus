@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樂活長照預約諮詢</title>
+    <!-- 只使用 Supabase client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { background-color: #e9ecef; font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; padding: 40px 20px; }
+        .form-container { background: #f0f2f5; width: 100%; max-width: 600px; text-align: center; color: #333; padding: 20px; border-radius: 8px; }
+        .header { font-size: 24px; letter-spacing: 8px; margin-bottom: 30px; color: #444; }
+        .question-title { color: #0000ff; font-size: 20px; font-weight: bold; margin-bottom: 20px; }
+        .field-label { font-size: 18px; font-weight: bold; margin: 15px 0 5px; }
+        select, textarea { width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; background: white; }
+        textarea { height: 80px; resize: none; }
+        .submit-btn { margin-top: 30px; padding: 12px 40px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 18px; }
+        .submit-btn:hover { background-color: #45a049; }
+        #message { margin-top: 20px; font-size: 16px; min-height: 24px; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="header">樂 活 長 照 預 約 諮 詢</div>
+    <hr>
+    <div class="question-title">個案 (長輩) 居住地點位於* ?</div>
+
+    <div class="field-label">【 縣 市 】*</div>
+    <select id="city" required>
+        <option value="">請選擇</option>
+        <option value="台南市">台南市</option>
+    </select>
+
+    <div class="field-label">【 鄉 鎮 市 區 】*</div>
+    <select id="district" required>
+        <option value="">請選擇</option>
+        <option value="北區">北區</option>
+        <option value="南區">南區</option>
+        <option value="東區">東區</option>
+        <option value="中西區">中西區</option>
+        <option value="安平區">安平區</option>
+        <!-- 其他鄉鎮可自行補充 -->
+    </select>
+
+    <div class="field-label">【 里 鄰 】</div>
+    <textarea id="village" placeholder="限 20 字內" maxlength="20"></textarea>
+
+    <div class="field-label">【 路 街 巷 弄 】*</div>
+    <textarea id="address" required placeholder="限 50 字內" maxlength="50"></textarea>
+
+    <div class="field-label">其他地點(請補充說明) :</div>
+    <textarea id="other_info" placeholder="限 50 字內" maxlength="50"></textarea>
+
+    <br>
+    <!-- 改成呼叫 submitForm() -->
+    <button class="submit-btn" onclick="submitForm()">送出預約</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+  // Supabase 設定 - 變數名全大寫避免衝突
+    const MY_SUPABASE_URL = 'https://tijdbbwldssjpsvjqto.supabase.co';
+    const MY_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpamRid2J3bGRzc2pwc3ZqcXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NTk2MjYsImV4cCI6MjA4NTMzNTYyNn0.H1HkxHrEEWA4Dj81sa3zjbNP864XeCrZvQCMy8hQdi0';
+
+    // 初始化 client（用獨立變數名，避免與 global supabase 衝突）
+    const sbClient = supabase.createClient(MY_SUPABASE_URL, MY_SUPABASE_ANON_KEY);
+
+    // 確認初始化成功（debug 用，可之後刪）
+    console.log('Supabase client 初始化狀態：', sbClient ? '成功' : '失敗');
+
+    async function submitForm() {
+        const messageDiv = document.getElementById('message');
+        if (!messageDiv) {
+            console.error('找不到 #message 元素');
+            return;
+        }
+        messageDiv.innerHTML = '<span style="color:orange">處理中，請稍候...</span>';
+
+        // 收集資料
+        const formData = {
+            city: document.getElementById('city')?.value?.trim() || '',
+            district: document.getElementById('district')?.value?.trim() || '',
+            village: document.getElementById('village')?.value?.trim() || '',
+            address: document.getElementById('address')?.value?.trim() || '',
+            other_info: document.getElementById('other_info')?.value?.trim() || ''
+        };
+
+       // 必填驗證
+        if (!formData.city || !formData.district || !formData.address) {
+            messageDiv.innerHTML = '<span style="color:red">請填寫所有必填欄位（縣市、鄉鎮市區、路街巷弄）</span>';
+            return;
+        }
+
+        try {
+            // 插入資料到 Supabase
+           const { data, error } = await sbClient
+                .from('bus_inquiries')  // 確認這與後台表名完全一樣
+                .insert([formData]);
+
+            if (error) {
+                throw error;
+            }
+               
+            console.log('插入成功，回傳資料：', data);
+
+            messageDiv.innerHTML = '<span style="color: green; font-weight: bold;">送出成功！我們會盡快聯繫您。</span>';
+
+            // 清空表單
+
+          ['city', 'district', 'village', 'address', 'other_info'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+
+           } catch (err) {
+            console.error('Supabase 錯誤：', err);
+            messageDiv.innerHTML = '<span style="color:red">送出失敗：' + (err.message || '未知錯誤，請檢查 F12 Console') + (err.code || '無') +'</span>';
+        }
+    }
+</script>
+
+</body>
+</html>
