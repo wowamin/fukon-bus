@@ -1,0 +1,75 @@
+body {
+     background-color: #e9ecef; 
+     font-family: "Microsoft JhengHei", sans-serif; 
+     display: flex; 
+     justify-content: center; 
+     padding: 40px 20px; }
+
+.form-container { 
+    background: #f0f2f5; 
+    width: 100%; 
+    max-width: 600px; 
+    text-align: center; 
+    color: #333; 
+    padding: 30px;
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+
+.header { 
+    font-size: 28px; 
+    letter-spacing: 10px; 
+    margin-bottom: 30px; 
+    color: #444; 
+    font-weight: bold; }
+
+.question-title { 
+    color: #0066cc; 
+    font-size: 22px; 
+    font-weight: bold; 
+    margin: 30px 0 20px; }
+
+.field-label { 
+    font-size: 18px; 
+    font-weight: bold; 
+    margin: 15px 0 8px; 
+    text-align: left; 
+    padding-left: 10%; }
+
+#city, #district {
+    font-weight: bold;
+    width: 84%;
+}
+
+
+
+input[type="text"], 
+input[type="tel"], 
+input[type="email"], 
+select, textarea {
+    width: 80%; 
+    padding: 12px; 
+    border: 1px solid #ccc; 
+    border-radius: 6px; 
+    font-size: 16px; 
+    background: white;
+        }
+
+textarea { 
+    height: 80px; 
+    resize: vertical; }
+
+.submit-btn { 
+    margin-top: 40px; 
+    padding: 14px 50px; 
+    background-color: #4CAF50; 
+    color: white; border: none; 
+    border-radius: 8px; cursor: pointer; 
+    font-size: 20px; font-weight: bold; }
+
+.submit-btn:hover {
+    background-color: #45a049; }
+#message { 
+    margin-top: 30px; 
+    font-size: 18px; 
+    min-height: 50px; 
+    line-height: 1.6; }

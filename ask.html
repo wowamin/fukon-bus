@@ -6,24 +6,21 @@
     <title>樂活長照預約諮詢</title>
     <!-- 只使用 Supabase client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        body { background-color: #e9ecef; font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; padding: 40px 20px; }
-        .form-container { background: #f0f2f5; width: 100%; max-width: 600px; text-align: center; color: #333; padding: 20px; border-radius: 8px; }
-        .header { font-size: 24px; letter-spacing: 8px; margin-bottom: 30px; color: #444; }
-        .question-title { color: #0000ff; font-size: 20px; font-weight: bold; margin-bottom: 20px; }
-        .field-label { font-size: 18px; font-weight: bold; margin: 15px 0 5px; }
-        select, textarea { width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; background: white; }
-        textarea { height: 80px; resize: none; }
-        .submit-btn { margin-top: 30px; padding: 12px 40px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 18px; }
-        .submit-btn:hover { background-color: #45a049; }
-        #message { margin-top: 20px; font-size: 16px; min-height: 24px; }
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
 <div class="form-container">
     <div class="header">樂 活 長 照 預 約 諮 詢</div>
     <hr>
+    <div class="field-label">姓名 *</div>
+    <input type="text" id="name" required placeholder="請輸入姓名" maxlength="20">
+
+    <div class="field-label">電話 *</div>
+    <input type="tel" id="phone" required placeholder="請輸入手機號碼" pattern="[0-9]{10}" maxlength="10">
+
+    <div class="field-label">Email</div>
+    <input type="email" id="email" placeholder="可選，方便聯繫">
     <div class="question-title">個案 (長輩) 居住地點位於* ?</div>
 
     <div class="field-label">【 縣 市 】*</div>
@@ -42,9 +39,6 @@
         <option value="安平區">安平區</option>
         <!-- 其他鄉鎮可自行補充 -->
     </select>
-
-    <div class="field-label">【 里 鄰 】</div>
-    <textarea id="village" placeholder="限 20 字內" maxlength="20"></textarea>
 
     <div class="field-label">【 路 街 巷 弄 】*</div>
     <textarea id="address" required placeholder="限 50 字內" maxlength="50"></textarea>
@@ -80,6 +74,9 @@
 
         // 收集資料
         const formData = {
+            name: document.getElementById('name').value.trim() || '',
+            phone: document.getElementById('phone').value.trim() || '',
+            email: document.getElementById('email').value.trim() || '',
             city: document.getElementById('city')?.value?.trim() || '',
             district: document.getElementById('district')?.value?.trim() || '',
             village: document.getElementById('village')?.value?.trim() || '',
@@ -97,27 +94,49 @@
             // 插入資料到 Supabase
            const { data, error } = await sbClient
                 .from('bus_inquiries')  // 確認這與後台表名完全一樣
-                .insert([formData]);
+                .insert([formData])
+                .select('id')  // 回傳剛 insert 的 id
+                .single();     // 只取一筆
 
             if (error) {
                 throw error;
             }
-               
+            
+            // 成功顯示預約編號（id 前 8 碼，避免太長）
+            const shortId = data.id.substring(0, 8).toUpperCase();
+            messageDiv.innerHTML = `<span style="color: green; font-weight: bold;">
+                送出成功！<br>
+                預約編號：${shortId}<br>
+                我們會盡快與您聯繫，謝謝！</span>`;
+
+            // 清空所有表單欄位（一次處理所有 input/select/textarea）
+            document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.value = '';
+            });
+
             console.log('插入成功，回傳資料：', data);
 
-            messageDiv.innerHTML = '<span style="color: green; font-weight: bold;">送出成功！我們會盡快聯繫您。</span>';
+            
 
-            // 清空表單
-
-          ['city', 'district', 'village', 'address', 'other_info'].forEach(id => {
+            ['city', 'district', 'village', 'address', 'other_info'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.value = '';
             });
 
            } catch (err) {
             console.error('Supabase 錯誤：', err);
-            messageDiv.innerHTML = '<span style="color:red">送出失敗：' + (err.message || '未知錯誤，請檢查 F12 Console') + (err.code || '無') +'</span>';
-        }
+
+            // 安全顯示錯誤訊息（避免 HTML 注入或語法錯亂）
+            const errorMessage = err.message || '未知錯誤，請檢查 F12 Console';
+            const errorCode = err.code || '無';
+
+            messageDiv.innerHTML = `
+                <span style="color:red">
+                    送出失敗：${errorMessage}<br>
+                    錯誤碼：${errorCode}
+                </span>
+            `;
+}
     }
 </script>
 
