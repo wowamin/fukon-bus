@@ -57,7 +57,7 @@
 <script>
   // Supabase 設定 - 變數名全大寫避免衝突
     const MY_SUPABASE_URL = 'https://gwwbbaunnsxexqcthvig.supabase.co';
-    const MY_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3d2JiYXVubnN4ZXhxY3RodmlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxODMwOTAsImV4cCI6MjA4NTc1OTA5MH0.XpQp0odkWBT1Evvw7p7A_iloHSuwTLPDxwaOG8srI24';
+    const MY_SUPABASE_ANON_KEY = 'sb_publishable_Y19r2pq9QlQH-00XHknP3Q_r7I8k7YH';
 
     // 初始化 client（用獨立變數名，避免與 global supabase 衝突）
     const sbClient = supabase.createClient(MY_SUPABASE_URL, MY_SUPABASE_ANON_KEY);
@@ -65,80 +65,164 @@
     // 確認初始化成功（debug 用，可之後刪）
     console.log('Supabase client 初始化狀態：', sbClient ? '成功' : '失敗');
 
-    async function submitForm() {
-        const messageDiv = document.getElementById('message');
-        if (!messageDiv) {
-            console.error('找不到 #message 元素');
-            return;
-        }
-        messageDiv.innerHTML = '<span style="color:orange">處理中，請稍候...</span>';
+async function submitForm() {
+    const messageDiv = document.getElementById('message');
+    messageDiv.innerHTML = '<span style="color:orange">處理中，請稍候...</span>';
 
-        // 收集資料
-        const formData = {
-            name: document.getElementById('name').value.trim() || '',
-            phone: document.getElementById('phone').value.trim() || '',
-            email: document.getElementById('email').value.trim() || '',
-            city: document.getElementById('city')?.value?.trim() || '',
-            district: document.getElementById('district')?.value?.trim() || '',
-            village: document.getElementById('village')?.value?.trim() || '',
-            address: document.getElementById('address')?.value?.trim() || '',
-            other_info: document.getElementById('other_info')?.value?.trim() || ''
-        };
-
-       // 必填驗證
-        if (!formData.city || !formData.district || !formData.address) {
-            messageDiv.innerHTML = '<span style="color:red">請填寫所有必填欄位（縣市、鄉鎮市區、路街巷弄）</span>';
-            return;
-        }
-
+    // 1. 收集資料 (確保完全不包含已刪除的 village)
+    const formData = {
+        name: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        city: document.getElementById('city').value,
+        district: document.getElementById('district').value,
+        address: document.getElementById('address').value.trim(),
+        other_info: document.getElementById('other_info').value.trim()
+    };
         try {
-            // 插入資料到 Supabase
-           const { data, error } = await sbClient
-                .from('bus_inquiries')  // 確認這與後台表名完全一樣
-                .insert([formData])
-                .select('id')  // 回傳剛 insert 的 id
-                .single();     // 只取一筆
+    const { data, error } = await sbClient
+        .from('bus_inquiries')
+        .insert([formData])
+        .select(); // 必須有 select 才能拿回 id
 
-            if (error) {
-                throw error;
-            }
-            
-            // 成功顯示預約編號（id 前 8 碼，避免太長）
-            const shortId = data.id.substring(0, 8).toUpperCase();
-            messageDiv.innerHTML = `<span style="color: green; font-weight: bold;">
-                送出成功！<br>
-                預約編號：${shortId}<br>
-                我們會盡快與您聯繫，謝謝！</span>`;
-
-            // 清空所有表單欄位（一次處理所有 input/select/textarea）
-            document.querySelectorAll('input, select, textarea').forEach(el => {
-            el.value = '';
-            });
-
-            console.log('插入成功，回傳資料：', data);
-
-            
-
-            ['city', 'district', 'village', 'address', 'other_info'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-
-           } catch (err) {
-            console.error('Supabase 錯誤：', err);
-
-            // 安全顯示錯誤訊息（避免 HTML 注入或語法錯亂）
-            const errorMessage = err.message || '未知錯誤，請檢查 F12 Console';
-            const errorCode = err.code || '無';
-
-            messageDiv.innerHTML = `
-                <span style="color:red">
-                    送出失敗：${errorMessage}<br>
-                    錯誤碼：${errorCode}
-                </span>
-            `;
-}
+    if (error) {
+        // 如果還有錯誤，這裡會印出具體原因 (例如：某個欄位不存在)
+        console.error('Supabase 插入失敗：', error.message, error.details);
+        throw error;
     }
+
+    if (data && data.length > 0) {
+        const shortId = data[0].id.toString().slice(-5);
+        messageDiv.innerHTML = `<span style="color: green; font-weight: bold;">預約成功！編號：${shortId}</span>`;
+        // 清空表單
+        document.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
+    }
+} catch (err) {
+    // 顯示詳細錯誤給使用者，方便我們除錯
+    messageDiv.innerHTML = `<span style="color:red">送出失敗：${err.message || '請檢查網路連線'}</span>`;
+}
+    // try {
+    //     // 2. 插入資料
+    //     const { data, error } = await sbClient
+    //         .from('bus_inquiries')
+    //         .insert([formData])
+    //         .select(); // 這裡改成 select() 拿取所有回傳欄位
+
+    //     if (error) throw error;
+
+    //     // 3. 檢查回傳資料是否有效 (防止 data 為空導致 read id 錯誤)
+    //     if (data && data.length > 0) {
+    //         const insertedRow = data[0];
+    //         // 將數字 id 轉為字串並取後 5 碼
+    //         const shortId = insertedRow.id.toString().slice(-5);
+            
+    //         messageDiv.innerHTML = `
+    //             <span style="color: green; font-weight: bold;">
+    //                 送出成功！<br>
+    //                 預約編號：${shortId}<br>
+    //                 我們會盡快與您聯繫，謝謝！
+    //             </span>`;
+
+    //         // 清空表單
+    //         document.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
+    //     } else {
+    //         throw new Error('資料插入成功但未回傳 ID，請重新整理頁面再試。');
+    //     }
+
+    // } catch (err) {
+    //     console.error('Supabase 錯誤詳情：', err);
+    //     // 如果是 401 錯誤，代表是權限問題
+    //     const msg = err.code === '42501' || err.status === 401 
+    //         ? '權限不足 (RLS Policy)，請確認 Supabase 設定。' 
+    //         : (err.message || '連線錯誤');
+        
+    //     messageDiv.innerHTML = `<span style="color:red">送出失敗：${msg}</span>`;
+    // }
+}
+
+
+//     async function submitForm() {
+//         const messageDiv = document.getElementById('message');
+//         if (!messageDiv) {
+//             console.error('找不到 #message 元素');
+//             return;
+//         }
+//         messageDiv.innerHTML = '<span style="color:orange">處理中，請稍候...</span>';
+
+//         // 收集資料
+//         const formData = {
+//             name: document.getElementById('name').value.trim() || '',
+//             phone: document.getElementById('phone').value.trim() || '',
+//             email: document.getElementById('email').value.trim() || '',
+//             city: document.getElementById('city')?.value?.trim() || '',
+//             district: document.getElementById('district')?.value?.trim() || '',
+//             address: document.getElementById('address')?.value?.trim() || '',
+//             other_info: document.getElementById('other_info')?.value?.trim() || ''
+//         };
+
+//        // 必填驗證
+//         if (!formData.city || !formData.district || !formData.address) {
+//             messageDiv.innerHTML = '<span style="color:red">請填寫所有必填欄位（縣市、鄉鎮市區、路街巷弄）</span>';
+//             return;
+//         }
+
+//         try {
+//             // 插入資料到 Supabase
+//            const { data, error } = await sbClient
+//                 .from('bus_inquiries')  // 確認這與後台表名完全一樣
+//                 .insert([formData])
+//                 .select('id')  // 回傳剛 insert 的 id
+//                 .single();     // 只取一筆
+
+//             // if (error) {
+//             //     throw error;
+//             // }
+//             if (!error && data) {
+//             // 將數字 ID 轉為字串，並取後 5 碼作為編號
+//             const shortId = data.id.toString().slice(-5); 
+//             messageDiv.innerHTML = `<span style="color: green; font-weight: bold;">
+//                 送出成功！<br>
+//                 預約編號：${shortId}<br>
+//                 我們會盡快與您聯繫，謝謝！</span>`;
+//             }
+            
+//             // 修正這裡：因為 id 是數字，要先轉成字串才能切長度
+//             const shortId = data.id.toString(5, '0');
+
+//             messageDiv.innerHTML = `<span style="color: green; font-weight: bold;">
+//                 送出成功！<br>
+//                 預約編號：${shortId}<br>
+//                 我們會盡快與您聯繫，謝謝！</span>`;
+
+//             // 清空所有表單欄位（一次處理所有 input/select/textarea）
+//             document.querySelectorAll('input, select, textarea').forEach(el => {
+//             el.value = '';
+//             });
+
+//             console.log('插入成功，回傳資料：', data);
+
+            
+
+//             ['city', 'district', 'village', 'address', 'other_info'].forEach(id => {
+//                 const el = document.getElementById(id);
+//                 if (el) el.value = '';
+//             });
+
+//            } catch (err) {
+//             console.error('Supabase 錯誤：', err);
+
+//             // 安全顯示錯誤訊息（避免 HTML 注入或語法錯亂）
+//             const errorMessage = err.message || '未知錯誤，請檢查 F12 Console';
+//             const errorCode = err.code || '無';
+
+//             messageDiv.innerHTML = `
+//                 <span style="color:red">
+//                     送出失敗：${errorMessage}<br>
+//                     錯誤碼：${errorCode}
+//                 </span>
+//             `;
+// }
+//     }
 </script>
 
 </body>
