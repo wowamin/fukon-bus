@@ -12,7 +12,7 @@
     <div class="header">樂活長照無障礙預約諮詢</div>
     <hr>
 
-    <form id="bookingForm">
+    <form action="https://script.google.com/macros/s/AKfycbyHKvBrGbMRG9kLNlQyEcsNrFpnwr9f12fTmDzce9ZCSqLyvsg8OGa9QQI_XubqxVkI/exec" method="POST">
         <div class="field-label">姓名 *</div>
         <input type="text" id="name" name="name" required placeholder="請輸入姓名" maxlength="20">
 
@@ -44,64 +44,12 @@
         <textarea id="address" name="address" required placeholder="限 50 字內" maxlength="50"></textarea>
 
         <div class="field-label">其他地點 (請補充說明)：</div>
-        <textarea id="other_info" name="other_info" placeholder="限 50 字內" maxlength="50"></textarea>
+        <textarea id="other_info" name="note" placeholder="限 50 字內" maxlength="50"></textarea>
 
         <br>
-        <button type="submit" id="submitBtn" class="submit-btn">送出預約</button>
-
-        <div id="message"></div>
+        <button type="submit" class="submit-btn">送出預約</button>
     </form>
 </div>
-
-<script>
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz-NpmDAvnKM5Jy5uv36v4MN2tvPJOFZWa6Y3U6GrxRVBjuJuXD5goqe38G7Ar6qw2M/exec';
-
-    document.getElementById('bookingForm').addEventListener('submit', submitForm);
-
-    async function submitForm(e) {
-        e.preventDefault();
-
-        const form = document.getElementById('bookingForm');
-        const messageDiv = document.getElementById('message');
-        const submitBtn = document.getElementById('submitBtn');
-
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-        }
-
-        const formData = {
-            name: document.getElementById('name').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            city: document.getElementById('city').value,
-            district: document.getElementById('district').value,
-            address: document.getElementById('address').value.trim(),
-            other_info: document.getElementById('other_info').value.trim()
-        };
-
-        submitBtn.disabled = true;
-        messageDiv.innerHTML = '<span style="color:orange">處理中，請稍候...</span>';
-
-        try {
-            await fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                },
-                body: new URLSearchParams(formData).toString(),
-                mode: 'no-cors'
-            });
-
-            messageDiv.innerHTML = '<span style="color:green;font-weight:bold;">預約成功！我們會盡快與您聯繫。</span>';
-            form.reset();
-        } catch (err) {
-            messageDiv.innerHTML = `<span style="color:red">送出失敗：${err.message || '請檢查網路連線後再試一次'}</span>`;
-        } finally {
-            submitBtn.disabled = false;
-        }
-    }
-</script>
 
 </body>
 </html>
